@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockAir;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,7 +39,7 @@ public class BlockIdtoName {
 
         for (int id = 0; id < 4096; id++) {
             Block b = Block.getBlockById(id);
-            if (b != null && b.getUnlocalizedName() != "tile.air") { // check for unlocalized name doesn't work
+            if (b != null && !(b instanceof BlockAir)) {
                 blocks.put(id, b.getUnlocalizedName());
             }
         }
