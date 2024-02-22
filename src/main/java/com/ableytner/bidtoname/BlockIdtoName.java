@@ -40,7 +40,7 @@ public class BlockIdtoName {
         for (int id = 0; id < 4096; id++) {
             Block b = Block.getBlockById(id);
             if (b != null && !(b instanceof BlockAir)) {
-                blocks.put(id, b.getUnlocalizedName());
+                blocks.put(id, b.getLocalizedName());
             }
         }
 
