@@ -43,6 +43,7 @@ public class BlockIdtoName {
         proxy.preInit(event);
     }
 
+    @SuppressWarnings("unchecked")
     public static void generateList() {
         JSONObject blocks = new JSONObject();
         int maxBlockId = 4096;
