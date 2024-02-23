@@ -1,10 +1,18 @@
 package com.ableytner.bidtoname;
 
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,15 +50,28 @@ public class BlockIdtoName {
             maxBlockId = 65535;
         }
 
-        for (int id = 0; id < maxBlockId; id++) {
-            Block b = Block.getBlockById(id);
+        for (int blockId = 0; blockId < maxBlockId; blockId++) {
+            Block b = Block.getBlockById(blockId);
             if (b != null && !(b instanceof BlockAir)) {
-                blocks.put(id, b.getLocalizedName());
+                List<ItemStack> subBlocks = new ArrayList<ItemStack>();
+                b.getSubBlocks(Item.getItemFromBlock(b), CreativeTabs.tabAllSearch, subBlocks);
+                for (int subBlockId = 0; subBlockId < subBlocks.size(); subBlockId++) {
+                    ItemStack i = subBlocks.get(subBlockId);
+                    Item item = i.getItem();
+                    if (item != null) {
+                        String name = Integer.toString(blockId) + ":" + Integer.toString(subBlockId);
+                        blocks.put(name, item.getItemStackDisplayName(i));
+                        if (item.getItemStackDisplayName(i)
+                            .contains("Bitt")) {
+                            LOG.info(item.getItemStackDisplayName(i));
+                        }
+                    }
+                }
             }
         }
 
         try {
-            FileWriter fw = new FileWriter("blockid_to_name.json");
+            Writer fw = new OutputStreamWriter(new FileOutputStream("blockid_to_name.json"), StandardCharsets.UTF_16); // forName("Windows-31J")
             fw.write((blocks.toJSONString()));
             fw.close();
             LOG.info("!!! saving finished !!!");
