@@ -1,5 +1,6 @@
 package com.ableytner.bidtoname;
 
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class CommonProxy {
@@ -9,4 +10,6 @@ public class CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         BlockIdtoName.LOG.info("I am BlockIdtoName at version " + Tags.VERSION);
     }
+
+    public void init(FMLInitializationEvent event) {}
 }
