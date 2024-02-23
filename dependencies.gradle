@@ -34,8 +34,6 @@
  * For more details, see https://docs.gradle.org/8.0.1/userguide/java_library_plugin.html#sec:java_library_configurations_graph
  */
 dependencies {
-    shadowImplementation("com.googlecode.json-simple:json-simple:1.1.1")
+    shadowImplementation("com.googlecode.json-simple:json-simple:1.1.1") // Apache 2.0
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.5.4-GTNH:dev")
-    implementation("org.apache.logging.log4j:log4j-1.2-api:2.23.0")
-    implementation("org.apache.logging.log4j:log4j-core:2.23.0")
 }
