@@ -3,13 +3,12 @@ package com.ableytner.bidtoname.commands;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 
 import com.ableytner.bidtoname.BlockIdtoName;
 
-public class SaveCommand extends CommandBase implements ICommand {
+public class SaveCommand extends CommandBase {
 
     @Override
     public String getCommandName() {
