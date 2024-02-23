@@ -20,8 +20,8 @@ import org.json.simple.JSONObject;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartedEvent;
 
 @Mod(
     modid = BlockIdtoName.MODID,
@@ -33,17 +33,17 @@ public class BlockIdtoName {
     public static final String MODID = "mymodid";
     public static final Logger LOG = LogManager.getLogger(MODID);
 
+    @SidedProxy(clientSide = "com.ableytner.bidtoname.ClientProxy", serverSide = "com.ableytner.bidtoname.CommonProxy")
+    public static CommonProxy proxy;
+
     @Mod.EventHandler
     // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the
     // GameRegistry." (Remove if not needed)
     public void preInit(FMLPreInitializationEvent event) {
-        LOG.info("I am BlockIdtoName at version " + Tags.VERSION);
+        proxy.preInit(event);
     }
 
-    @Mod.EventHandler
-    public void worldStart(FMLServerStartedEvent event) {
-        LOG.info("!!! server started !!!");
-
+    public static void generateList() {
         JSONObject blocks = new JSONObject();
         int maxBlockId = 4096;
         if (Loader.isModLoaded("neid")) {
