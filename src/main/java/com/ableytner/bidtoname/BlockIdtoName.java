@@ -13,6 +13,7 @@ import org.json.simple.JSONObject;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
+import cpw.mods.fml.common.Loader;
 
 @Mod(
     modid = BlockIdtoName.MODID,
@@ -36,8 +37,12 @@ public class BlockIdtoName {
         LOG.info("!!! server started !!!");
 
         JSONObject blocks = new JSONObject();
+        int maxBlockId = 4096;
+        if (Loader.isModLoaded("neid")) {
+            maxBlockId = 65535;
+        }
 
-        for (int id = 0; id < 4096; id++) {
+        for (int id = 0; id < maxBlockId; id++) {
             Block b = Block.getBlockById(id);
             if (b != null && !(b instanceof BlockAir)) {
                 blocks.put(id, b.getLocalizedName());
