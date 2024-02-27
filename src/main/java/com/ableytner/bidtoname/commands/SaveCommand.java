@@ -6,7 +6,7 @@ import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 
-import com.ableytner.bidtoname.BlockIdtoName;
+import com.ableytner.bidtoname.util.ListGenerator;
 
 public class SaveCommand extends CommandBase {
 
@@ -29,7 +29,7 @@ public class SaveCommand extends CommandBase {
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
         Minecraft.getMinecraft().thePlayer
             .addChatMessage(new ChatComponentText("Saving blockid mappings, this may take a while..."));
-        BlockIdtoName.generateList();
+        ListGenerator.generateList(true);
         Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Saved to 'blockid_to_name.json'"));
     }
 }

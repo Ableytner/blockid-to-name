@@ -1,15 +1,20 @@
 package com.ableytner.bidtoname;
 
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
 
-public class CommonProxy {
+public abstract class CommonProxy {
 
-    // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the
-    // GameRegistry." (Remove if not needed)
-    public void preInit(FMLPreInitializationEvent event) {
-        BlockIdtoName.LOG.info("I am BlockIdtoName at version " + Tags.VERSION);
-    }
+    @SidedProxy(
+        clientSide = "com.ableytner.bidtoname.client.ClientProxy",
+        serverSide = "com.ableytner.bidtoname.server.ServerProxy")
+    public static CommonProxy proxy;
 
-    public void init(FMLInitializationEvent event) {}
+    public abstract void preInit(FMLPreInitializationEvent event);
+
+    public abstract void init(FMLInitializationEvent event);
+
+    public abstract void worldStart(FMLServerStartedEvent event);
 }
