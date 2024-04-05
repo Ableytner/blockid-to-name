@@ -12,7 +12,8 @@ import cpw.mods.fml.common.event.FMLServerStartedEvent;
     modid = BlockIdtoName.MODID,
     version = Tags.VERSION,
     name = "BlockIdtoName",
-    acceptedMinecraftVersions = "[1.7.10]")
+    acceptedMinecraftVersions = "[1.7.10]",
+    acceptableRemoteVersions = "*")
 public class BlockIdtoName {
 
     public static final String MODID = "bidtoname";
